@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Automation Discovery — Free Assessment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1B3A6B;--accent:#2E86AB;--light:#EAF2F8;--border:#D0D8E4;
+  --txt:#1A1A2E;--muted:#6B7A99;--white:#fff;--success:#1D9E75;
+  --warn:#EF9F27;--red:#E24B4A;--gray:#F5F7FA;
+}
+body{font-family:'DM Sans',sans-serif;background:#F0F4F8;color:var(--txt);min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:2rem 1rem}
+.card{background:var(--white);border-radius:16px;overflow:hidden;width:100%;max-width:580px;box-shadow:0 4px 40px rgba(27,58,107,0.10)}
+.hero{background:var(--navy);padding:2.5rem 2rem 2rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;border:40px solid rgba(46,134,171,0.2)}
+.hero::after{content:'';position:absolute;bottom:-60px;left:20%;width:120px;height:120px;border-radius:50%;border:30px solid rgba(255,255,255,0.06)}
+.hero-tag{display:inline-block;background:rgba(46,134,171,0.25);color:#7BC8E2;font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;padding:4px 12px;border-radius:20px;margin-bottom:12px;text-transform:uppercase}
+.hero h1{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:8px;position:relative}
+.hero p{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.6;max-width:480px;position:relative}
+.hero-meta{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;position:relative}
+.hero-pill{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);font-size:12px;padding:4px 12px;border-radius:20px}
+.progress-bar{height:3px;background:rgba(27,58,107,0.1)}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#7BC8E2);transition:width 0.4s ease;width:0%}
+.form-body{padding:1.8rem 1.8rem 2rem}
+.step{display:none}
+.step.active{display:block}
+.step-label{font-family:'Syne',sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:4px}
+.step-title{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.step-sub{font-size:13px;color:var(--muted);margin-bottom:1.5rem;line-height:1.5}
+.field{margin-bottom:1.2rem}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--txt);margin-bottom:6px}
+.field label span.req{color:var(--red);margin-left:2px}
+.field input,.field textarea,.field select{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--txt);background:var(--white);outline:none;transition:border 0.2s}
+.field input:focus,.field textarea:focus{border-color:var(--accent)}
+.field textarea{resize:vertical;min-height:80px;line-height:1.6}
+.field-hint{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.4}
+.radio-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px}
+.radio-card{border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--txt)}
+.radio-card:hover{border-color:var(--accent);background:var(--light)}
+.radio-card.selected{border-color:var(--accent);background:var(--light);color:var(--navy);font-weight:500}
+.radio-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all 0.2s}
+.radio-card.selected .radio-dot{border-color:var(--accent);background:var(--accent)}
+.rating-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f0f2f5}
+.rating-row:last-child{border-bottom:none}
+.rating-label{flex:1;font-size:13px;color:var(--txt);line-height:1.3}
+.rating-stars{display:flex;gap:4px}
+.star-btn{width:30px;height:30px;border-radius:6px;border:1.5px solid var(--border);background:none;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:all 0.15s;display:flex;align-items:center;justify-content:center}
+.star-btn:hover{border-color:var(--accent);background:var(--light);color:var(--navy)}
+.star-btn.active{border-color:var(--accent);background:var(--light);color:var(--navy)}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid #f0f2f5}
+.btn-back{background:none;border:1.5px solid var(--border);color:var(--muted);padding:9px 20px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;transition:all 0.2s}
+.btn-back:hover{border-color:var(--txt);color:var(--txt)}
+.btn-next{background:var(--navy);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s}
+.btn-next:hover{background:var(--accent)}
+.btn-next.green{background:var(--success)}
+.btn-next.green:hover{background:#178f68}
+.step-dots{display:flex;gap:6px;align-items:center}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:all 0.3s}
+.dot.active{background:var(--accent);width:18px;border-radius:3px}
+.dot.done{background:var(--success)}
+.tag-grid{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.tag{border:1.5px solid var(--border);border-radius:20px;padding:5px 13px;font-size:12px;cursor:pointer;transition:all 0.2s;color:var(--txt);user-select:none}
+.tag:hover{border-color:var(--accent);background:var(--light)}
+.tag.selected{border-color:var(--accent);background:var(--light);color:var(--navy);font-weight:500}
+.char-count{font-size:11px;color:var(--muted);text-align:right;margin-top:3px}
+.success-screen{display:none;padding:2rem 1.8rem 2.5rem;text-align:center}
+.success-icon{width:64px;height:64px;border-radius:50%;background:var(--light);margin:0 auto 1.2rem;display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--success);font-weight:700}
+.success-screen h2{font-family:'Syne',sans-serif;font-size:1.4rem;color:var(--navy);margin-bottom:8px}
+.success-screen p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:1.5rem}
+.summary-box{background:var(--gray);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;text-align:left;margin-bottom:1.2rem;max-height:260px;overflow-y:auto}
+.summary-row{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px solid #e8ecf2;gap:12px}
+.summary-row:last-child{border-bottom:none}
+.summary-row .sk{color:var(--muted);font-size:12px;flex-shrink:0;padding-top:1px}
+.summary-row .sv{font-weight:500;color:var(--navy);font-size:12px;text-align:right;word-break:break-word}
+.btn-email{background:var(--navy);color:#fff;border:none;padding:13px 32px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;width:100%;transition:all 0.2s;margin-bottom:8px}
+.btn-email:hover{background:var(--accent)}
+.btn-copy{background:none;border:1.5px solid var(--border);color:var(--muted);padding:10px 32px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;width:100%;transition:all 0.2s}
+.btn-copy:hover{border-color:var(--navy);color:var(--navy)}
+.copy-notice{font-size:11px;color:var(--muted);margin-top:8px}
+.error-msg{font-size:12px;color:var(--red);margin-top:4px;display:none}
+.rating-block{background:var(--gray);border-radius:10px;padding:0.8rem 1rem}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="hero">
+    <div class="hero-tag">AI Automation Discovery</div>
+    <h1>Let's find your automation opportunities</h1>
+    <p>Takes about 5 minutes. Your answers help us build a tailored automation roadmap — no fluff, no hard sell.</p>
+    <div class="hero-meta">
+      <span class="hero-pill">5 min</span>
+      <span class="hero-pill">Confidential</span>
+      <span class="hero-pill">Free assessment</span>
+    </div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="prog"></div></div>
+
+  <div class="form-body">
+
+    <!-- STEP 1 -->
+    <div id="step1" class="step active">
+      <div class="step-label">Step 1 of 5</div>
+      <div class="step-title">About you</div>
+      <div class="step-sub">Let's start with the basics so we can tailor everything to your situation.</div>
+      <div class="field">
+        <label>Full name <span class="req">*</span></label>
+        <input type="text" id="name" placeholder="Jane Smith">
+        <div class="error-msg" id="err-name">Please enter your name.</div>
+      </div>
+      <div class="field">
+        <label>Email address <span class="req">*</span></label>
+        <input type="email" id="email" placeholder="jane@company.com">
+        <div class="error-msg" id="err-email">Please enter a valid email address.</div>
+      </div>
+      <div class="field">
+        <label>Company / firm name</label>
+        <input type="text" id="company" placeholder="Smith & Associates">
+      </div>
+      <div class="field">
+        <label>Your role / title</label>
+        <input type="text" id="role" placeholder="Managing Partner, Operations Manager...">
+      </div>
+      <div class="nav">
+        <div class="step-dots">
+          <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+        <button class="btn-next" onclick="goTo(1,2)">Next →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div id="step2" class="step">
+      <div class="step-label">Step 2 of 5</div>
+      <div class="step-title">Your industry & team</div>
+      <div class="step-sub">Tell us about your business so we can focus on what's most relevant.</div>
+      <div class="field">
+        <label>What industry are you in? <span class="req">*</span></label>
+        <div class="radio-grid">
+          <div class="radio-card" onclick="selectRadio('industry','Finance & Accounting',this)"><div class="radio-dot"></div>Finance & Accounting</div>
+          <div class="radio-card" onclick="selectRadio('industry','Legal & Compliance',this)"><div class="radio-dot"></div>Legal & Compliance</div>
+          <div class="radio-card" onclick="selectRadio('industry','Insurance',this)"><div class="radio-dot"></div>Insurance</div>
+          <div class="radio-card" onclick="selectRadio('industry','Real Estate',this)"><div class="radio-dot"></div>Real Estate</div>
+          <div class="radio-card" onclick="selectRadio('industry','Consulting / Advisory',this)"><div class="radio-dot"></div>Consulting / Advisory</div>
+          <div class="radio-card" onclick="selectRadio('industry','Other',this)"><div class="radio-dot"></div>Other</div>
+        </div>
+        <div class="error-msg" id="err-industry">Please select your industry.</div>
+      </div>
+      <div class="field">
+        <label>How many people are on your team?</label>
+        <div class="radio-grid">
+          <div class="radio-card" onclick="selectRadio('size','Solo / 1–2',this)"><div class="radio-dot"></div>Solo / 1–2</div>
+          <div class="radio-card" onclick="selectRadio('size','3–10',this)"><div class="radio-dot"></div>3–10</div>
+          <div class="radio-card" onclick="selectRadio('size','11–50',this)"><div class="radio-dot"></div>11–50</div>
+          <div class="radio-card" onclick="selectRadio('size','50+',this)"><div class="radio-dot"></div>50+</div>
+        </div>
+      </div>
+      <div class="nav">
+        <button class="btn-back" onclick="goTo(2,1)">← Back</button>
+        <div class="step-dots">
+          <div class="dot done"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+        <button class="btn-next" onclick="goTo(2,3)">Next →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div id="step3" class="step">
+      <div class="step-label">Step 3 of 5</div>
+      <div class="step-title">Your biggest pain points</div>
+      <div class="step-sub">Where is your team losing the most time or making the most mistakes?</div>
+      <div class="field">
+        <label>Which areas are slowing you down? <span style="color:var(--muted);font-weight:400">(select all that apply)</span></label>
+        <div class="tag-grid">
+          <div class="tag" onclick="toggleTag(this)">Manual data entry</div>
+          <div class="tag" onclick="toggleTag(this)">Report generation</div>
+          <div class="tag" onclick="toggleTag(this)">Document processing</div>
+          <div class="tag" onclick="toggleTag(this)">Compliance tracking</div>
+          <div class="tag" onclick="toggleTag(this)">Client follow-ups</div>
+          <div class="tag" onclick="toggleTag(this)">Invoice / billing</div>
+          <div class="tag" onclick="toggleTag(this)">Contract review</div>
+          <div class="tag" onclick="toggleTag(this)">Onboarding & intake</div>
+          <div class="tag" onclick="toggleTag(this)">Approvals & sign-offs</div>
+          <div class="tag" onclick="toggleTag(this)">Data reconciliation</div>
+          <div class="tag" onclick="toggleTag(this)">Regulatory filings</div>
+          <div class="tag" onclick="toggleTag(this)">Internal reporting</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>In your own words — what's the single most painful task your team deals with?</label>
+        <textarea id="paintext" placeholder="E.g. Every Monday morning we spend 3 hours manually pulling numbers from different systems to build a client report..." oninput="updateChar(this,'painchar',300)"></textarea>
+        <div class="char-count" id="painchar">0 / 300</div>
+      </div>
+      <div class="nav">
+        <button class="btn-back" onclick="goTo(3,2)">← Back</button>
+        <div class="step-dots">
+          <div class="dot done"></div><div class="dot done"></div><div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+        <button class="btn-next" onclick="goTo(3,4)">Next →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div id="step4" class="step">
+      <div class="step-label">Step 4 of 5</div>
+      <div class="step-title">Severity & readiness</div>
+      <div class="step-sub">Rate how much each area impacts your team (1 = minor, 5 = critical).</div>
+      <div class="field">
+        <div class="rating-block" id="rating-container"></div>
+      </div>
+      <div class="field">
+        <label>Have you tried any automation tools before?</label>
+        <div class="radio-grid">
+          <div class="radio-card" onclick="selectRadio('exp','No, this is new for us',this)"><div class="radio-dot"></div>No, this is new for us</div>
+          <div class="radio-card" onclick="selectRadio('exp','Tried a few things',this)"><div class="radio-dot"></div>Tried a few things</div>
+          <div class="radio-card" onclick="selectRadio('exp','Have some tools running',this)"><div class="radio-dot"></div>Have some tools running</div>
+          <div class="radio-card" onclick="selectRadio('exp','Actively automating',this)"><div class="radio-dot"></div>Actively automating</div>
+        </div>
+      </div>
+      <div class="nav">
+        <button class="btn-back" onclick="goTo(4,3)">← Back</button>
+        <div class="step-dots">
+          <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot active"></div><div class="dot"></div>
+        </div>
+        <button class="btn-next" onclick="goTo(4,5)">Next →</button>
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div id="step5" class="step">
+      <div class="step-label">Step 5 of 5</div>
+      <div class="step-title">Goals & timeline</div>
+      <div class="step-sub">What would a win look like for you — and when do you want to get started?</div>
+      <div class="field">
+        <label>What would success look like in 3 months?</label>
+        <textarea id="success" placeholder="E.g. Our team gets 5 hours back per week, reports go out automatically every Friday, zero manual data entry for client onboarding..." oninput="updateChar(this,'succhar',300)"></textarea>
+        <div class="char-count" id="succhar">0 / 300</div>
+      </div>
+      <div class="field">
+        <label>When are you looking to get started?</label>
+        <div class="radio-grid">
+          <div class="radio-card" onclick="selectRadio('timing','ASAP',this)"><div class="radio-dot"></div>ASAP</div>
+          <div class="radio-card" onclick="selectRadio('timing','Next 1–3 months',this)"><div class="radio-dot"></div>Next 1–3 months</div>
+          <div class="radio-card" onclick="selectRadio('timing','3–6 months',this)"><div class="radio-dot"></div>3–6 months</div>
+          <div class="radio-card" onclick="selectRadio('timing','Just exploring',this)"><div class="radio-dot"></div>Just exploring</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Any final thoughts or questions for us?</label>
+        <textarea id="notes" placeholder="Anything else you'd like us to know before our call..." style="min-height:60px"></textarea>
+      </div>
+      <div class="nav">
+        <button class="btn-back" onclick="goTo(5,4)">← Back</button>
+        <div class="step-dots">
+          <div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot active"></div>
+        </div>
+        <button class="btn-next green" onclick="showReview()">Review & Submit →</button>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">✓</div>
+      <h2>You're all set!</h2>
+      <p>Here's a summary of what you're about to send. Hit the button below to open a pre-filled email — just hit send and we'll be in touch within 24 hours.</p>
+      <div class="summary-box" id="summaryBox"></div>
+      <button class="btn-email" onclick="openEmail()">Open pre-filled email →</button>
+      <button class="btn-copy" onclick="copyOnly()">Copy answers to clipboard</button>
+      <div class="copy-notice" id="copyConfirm"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+var data={industry:'',size:'',exp:'',timing:'',painTags:[],ratings:{}};
+var ratingItems=['Manual data entry','Report generation','Document processing','Compliance tracking','Client follow-ups'];
+
+(function buildRatings(){
+  var c=document.getElementById('rating-container');
+  ratingItems.forEach(function(item){
+    data.ratings[item]=0;
+    var row=document.createElement('div');
+    row.className='rating-row';
+    var safeId='stars-'+item.replace(/[^a-z0-9]/gi,'-');
+    row.innerHTML='<div class="rating-label">'+item+'</div><div class="rating-stars" id="'+safeId+'"></div>';
+    c.appendChild(row);
+    var stars=row.querySelector('.rating-stars');
+    for(var i=1;i<=5;i++){
+      (function(val,lbl,starsEl){
+        var b=document.createElement('button');
+        b.className='star-btn';b.textContent=val;b.type='button';
+        b.onclick=function(){
+          data.ratings[lbl]=val;
+          var all=starsEl.querySelectorAll('.star-btn');
+          all.forEach(function(s,idx){s.classList.toggle('active',idx<val);});
+        };
+        starsEl.appendChild(b);
+      })(i,item,stars);
+    }
+  });
+})();
+
+function goTo(from,to){
+  if(to>from&&!validate(from)) return;
+  document.querySelectorAll('.step').forEach(function(s){s.classList.remove('active');});
+  var el=document.getElementById('step'+to);
+  if(el){el.classList.add('active');}
+  document.getElementById('prog').style.width=(to/5*100)+'%';
+  window.scrollTo(0,0);
+}
+
+function validate(step){
+  var ok=true;
+  if(step===1){
+    var n=document.getElementById('name').value.trim();
+    var e=document.getElementById('email').value.trim();
+    var ename=document.getElementById('err-name');
+    var eemail=document.getElementById('err-email');
+    if(!n){ename.style.display='block';ok=false;}else{ename.style.display='none';}
+    if(!e||!e.includes('@')){eemail.style.display='block';ok=false;}else{eemail.style.display='none';}
+  }
+  if(step===2){
+    var ei=document.getElementById('err-industry');
+    if(!data.industry){ei.style.display='block';ok=false;}else{ei.style.display='none';}
+  }
+  return ok;
+}
+
+function selectRadio(key,val,el){
+  data[key]=val;
+  var grid=el.parentElement;
+  grid.querySelectorAll('.radio-card').forEach(function(c){c.classList.remove('selected');});
+  el.classList.add('selected');
+}
+
+function toggleTag(el){
+  el.classList.toggle('selected');
+  var t=el.textContent;
+  var idx=data.painTags.indexOf(t);
+  if(idx>-1)data.painTags.splice(idx,1);
+  else data.painTags.push(t);
+}
+
+function updateChar(el,id,max){
+  if(el.value.length>max)el.value=el.value.slice(0,max);
+  document.getElementById(id).textContent=el.value.length+' / '+max;
+}
+
+function buildEmailBody(){
+  var n=document.getElementById('name').value;
+  var e=document.getElementById('email').value;
+  var co=document.getElementById('company').value||'Not provided';
+  var ro=document.getElementById('role').value||'Not provided';
+  var pt=document.getElementById('paintext').value||'Not provided';
+  var su=document.getElementById('success').value||'Not provided';
+  var no=document.getElementById('notes').value||'None';
+  var ratingStr=ratingItems.map(function(r){return '  '+r+': '+(data.ratings[r]||'not rated')+'/5';}).join('\n');
+  return 'AI AUTOMATION DISCOVERY — SUBMITTED FORM\n'
+    +'==========================================\n\n'
+    +'NAME: '+n+'\n'
+    +'EMAIL: '+e+'\n'
+    +'COMPANY: '+co+'\n'
+    +'ROLE: '+ro+'\n\n'
+    +'INDUSTRY: '+(data.industry||'Not selected')+'\n'
+    +'TEAM SIZE: '+(data.size||'Not selected')+'\n\n'
+    +'PAIN AREAS SELECTED:\n  '+(data.painTags.length?data.painTags.join(', '):'None selected')+'\n\n'
+    +'MAIN PAIN POINT:\n'+pt+'\n\n'
+    +'AUTOMATION EXPERIENCE: '+(data.exp||'Not selected')+'\n\n'
+    +'PAIN POINT SEVERITY RATINGS:\n'+ratingStr+'\n\n'
+    +'SUCCESS IN 3 MONTHS:\n'+su+'\n\n'
+    +'TIMELINE: '+(data.timing||'Not selected')+'\n\n'
+    +'ADDITIONAL NOTES:\n'+no+'\n\n'
+    +'==========================================\n'
+    +'Submitted via AI Automation Discovery Form';
+}
+
+function showReview(){
+  document.querySelectorAll('.step').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('successScreen').style.display='block';
+  document.getElementById('prog').style.width='100%';
+  var n=document.getElementById('name').value;
+  var e=document.getElementById('email').value;
+  var co=document.getElementById('company').value||'—';
+  var ro=document.getElementById('role').value||'—';
+  var rows=[
+    ['Name',n],['Email',e],['Company',co],['Role',ro],
+    ['Industry',data.industry||'—'],['Team size',data.size||'—'],
+    ['Pain areas',data.painTags.length?data.painTags.join(', '):'—'],
+    ['Main pain point',(document.getElementById('paintext').value||'—').slice(0,80)+(document.getElementById('paintext').value.length>80?'…':'')],
+    ['Automation experience',data.exp||'—'],
+    ['Success looks like',(document.getElementById('success').value||'—').slice(0,80)+(document.getElementById('success').value.length>80?'…':'')],
+    ['Timeline',data.timing||'—'],
+  ];
+  ratingItems.forEach(function(r){if(data.ratings[r])rows.push([r+' severity',data.ratings[r]+'/5']);});
+  document.getElementById('summaryBox').innerHTML=rows.map(function(r){
+    return '<div class="summary-row"><span class="sk">'+r[0]+'</span><span class="sv">'+r[1]+'</span></div>';
+  }).join('');
+  window.scrollTo(0,0);
+}
+
+function openEmail(){
+  var body=buildEmailBody();
+  var n=document.getElementById('name').value;
+  var co=document.getElementById('company').value||'';
+  var subject='AI Automation Discovery — '+n+(co?' ('+co+')':'');
+  try{navigator.clipboard.writeText(body);}catch(err){}
+  window.location.href='mailto:vanshjalan1@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+}
+
+function copyOnly(){
+  var body=buildEmailBody();
+  navigator.clipboard.writeText(body).then(function(){
+    document.getElementById('copyConfirm').textContent='Copied to clipboard!';
+    setTimeout(function(){document.getElementById('copyConfirm').textContent='';},3000);
+  }).catch(function(){
+    document.getElementById('copyConfirm').textContent='Please copy manually from the summary above.';
+  });
+}
+</script>
+</body>
+</html>
